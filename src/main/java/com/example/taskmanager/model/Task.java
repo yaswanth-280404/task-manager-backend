@@ -49,7 +49,7 @@ public class Task {
 		this.decription = decription;
 	}
 
-	public boolean isComplpeted() {
+	public boolean isCompleted() {
 		return complpeted;
 	}
 

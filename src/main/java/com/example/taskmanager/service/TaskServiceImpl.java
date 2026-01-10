@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.taskmanager.exception.ResourceNotFoundException;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
 
@@ -32,16 +33,15 @@ public class TaskServiceImpl implements TaskService{
 	public Task getTaskbyId(Long id) {
 		// TODO Auto-generated method stub
 		return taskRepository.findById(id)
-				.orElse(null);
+				.orElseThrow( () ->
+				new ResourceNotFoundException("Task not found with the id: " + id));
 	}
 
 	@Override
 	public Task updateTask(Long id, Task task) {
 		// TODO Auto-generated method stub
 		Task existingTask = getTaskbyId(id);
-		if (existingTask == null) {
-			return null;
-		}
+		
 		
 		existingTask.setTitle(task.getTitle());
 		existingTask.setId(task.getId());
@@ -54,7 +54,8 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public void deleteTask(Long id) {
 		// TODO Auto-generated method stub
-		taskRepository.deleteById(id);
+		Task existingTask = getTaskbyId(id);
+		taskRepository.delete(existingTask);
 		
 	}
 

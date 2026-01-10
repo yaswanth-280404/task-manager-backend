@@ -45,27 +45,19 @@ public class TaskController {
 	@GetMapping("/{id}")
 	@Operation(summary = "Get task by ID")
 	public ResponseEntity<Task> getTaskById(@PathVariable Long id){
-		Task task = taskService.getTaskbyId(id);
-		if (task == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(task);
+		
+		return ResponseEntity.ok(taskService.getTaskbyId(id));
 	}
 	
 	@PutMapping("/{id}")
 	@Operation(summary = "Update a Task by ID")
 	public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task){
-		Task updatedTask = taskService.updateTask(id, task);
-		if (updatedTask == null) {
-			return ResponseEntity.notFound().build();					
-		}
-		
-		return ResponseEntity.ok(updatedTask);
+		return ResponseEntity.ok(taskService.updateTask(id, task));
 	}
 	
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Delete a task by ID")
-	public ResponseEntity<Void> deleteTask(@PathVariable Long id){
+	public ResponseEntity<Void> deleteTask(@PathVariable Long id){	
 		taskService.deleteTask(id);
 		return ResponseEntity.noContent().build();
 	}

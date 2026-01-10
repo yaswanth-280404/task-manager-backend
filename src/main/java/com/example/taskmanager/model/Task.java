@@ -23,7 +23,7 @@ public class Task {
 	private String decription;
 	
 	@Column(nullable = false)
-	private boolean complpeted;
+	private boolean completed;
 	
 	public Long getId() {
 		return id;
@@ -50,19 +50,19 @@ public class Task {
 	}
 
 	public boolean isCompleted() {
-		return complpeted;
+		return completed;
 	}
 
-	public void setComplpeted(boolean complpeted) {
-		this.complpeted = complpeted;
+	public void setCompleted(boolean complpeted) {
+		this.completed = complpeted;
 	}
 
-	public Task(Long id, String title, String decription, boolean complpeted) {
+	public Task(Long id, String title, String decription, boolean completed) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.decription = decription;
-		this.complpeted = complpeted;
+		this.completed = completed;
 	}
 
 	public Task() {

@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/tasks")
-@Tag(name= "Health API", description = "Application Health Checkpoints")
+@Tag(name= "TASK API", description = "API's for managing tasks")
 public class TaskController {
 	
 	private final TaskService taskService ;

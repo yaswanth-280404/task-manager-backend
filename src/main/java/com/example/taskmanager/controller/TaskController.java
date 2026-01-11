@@ -1,4 +1,8 @@
 package com.example.taskmanager.controller;
+import com.example.taskmanager.dto.TaskRequestDto;
+import com.example.taskmanager.dto.TaskResponseDto;
+import jakarta.validation.Valid;
+
 
 import java.util.List;
 
@@ -30,29 +34,32 @@ public class TaskController {
 	}
 	
 	@PostMapping
-	@Operation(summary = "Creating a new task")
-	
-	public ResponseEntity<Task> createTask (@RequestBody Task task){
-		return ResponseEntity.ok(taskService.createTask(task));
+	@Operation(summary = "Create a new task")
+	public ResponseEntity<TaskResponseDto> createTask(
+	        @Valid @RequestBody TaskRequestDto dto) {
+
+	    return ResponseEntity.ok(taskService.createTask(dto));
 	}
+
 	
 	@GetMapping
 	@Operation(summary = " Get all tasks ")
-	public ResponseEntity<List<Task>> getAllTasks(){
-		return ResponseEntity.ok(taskService.getAllTask());
+	public ResponseEntity<List<TaskResponseDto>> getAllTasks(){
+		return ResponseEntity.ok(taskService.getAllTasks());
 	}
 	
 	@GetMapping("/{id}")
 	@Operation(summary = "Get task by ID")
-	public ResponseEntity<Task> getTaskById(@PathVariable Long id){
+	public ResponseEntity<TaskResponseDto> getTaskById(@PathVariable Long id){
 		
-		return ResponseEntity.ok(taskService.getTaskbyId(id));
+		return ResponseEntity.ok(taskService.getTaskById(id));
 	}
 	
 	@PutMapping("/{id}")
 	@Operation(summary = "Update a Task by ID")
-	public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task){
-		return ResponseEntity.ok(taskService.updateTask(id, task));
+	public ResponseEntity<TaskResponseDto> updateTask(@PathVariable Long id, 
+			@Valid @RequestBody TaskRequestDto dto){
+		return ResponseEntity.ok(taskService.updateTask(id, dto));
 	}
 	
 	@DeleteMapping("/{id}")

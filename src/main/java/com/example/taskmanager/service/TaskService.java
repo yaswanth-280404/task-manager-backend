@@ -2,17 +2,18 @@ package com.example.taskmanager.service;
 
 import java.util.List;
 
-import com.example.taskmanager.model.Task;
+import com.example.taskmanager.dto.TaskRequestDto;
+import com.example.taskmanager.dto.TaskResponseDto;
 
 public interface TaskService {
 	
-	Task createTask(Task task);
+	TaskResponseDto createTask(TaskRequestDto dto);
 	
-	List<Task> getAllTask();
+	List<TaskResponseDto> getAllTasks();
 	
-	Task getTaskbyId(Long id);
+	TaskResponseDto getTaskById(Long id);
 	
-	Task updateTask(Long id, Task task);
+	TaskResponseDto updateTask(Long id, TaskRequestDto task);
 	
 	void deleteTask(Long id);
 

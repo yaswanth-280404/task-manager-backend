@@ -1,4 +1,5 @@
 package com.example.taskmanager.exception;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -18,6 +19,26 @@ public class GlobalExceptionHandler {
 		error.put("error", "Not Found");
 		error.put("message", ex.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<Map<String, Object>> handleValidationErrors(
+	        MethodArgumentNotValidException ex) {
+
+	    Map<String, String> fieldErrors = new HashMap<>();
+
+	    ex.getBindingResult()
+	      .getFieldErrors()
+	      .forEach(error ->
+	          fieldErrors.put(error.getField(), error.getDefaultMessage())
+	      );
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("timestamp", LocalDateTime.now());
+	    response.put("status", HttpStatus.BAD_REQUEST.value());
+	    response.put("errors", fieldErrors);
+
+	    return ResponseEntity.badRequest().body(response);
 	}
 	
 }

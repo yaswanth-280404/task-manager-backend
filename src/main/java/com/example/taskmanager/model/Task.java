@@ -20,7 +20,7 @@ public class Task {
 	private String title;
 	
 	@Column(length = 500)
-	private String decription;
+	private String description;
 	
 	@Column(nullable = false)
 	private boolean completed;
@@ -41,12 +41,12 @@ public class Task {
 		this.title = title;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String decription) {
+		this.description = decription;
 	}
 
 	public boolean isCompleted() {
@@ -61,7 +61,7 @@ public class Task {
 		super();
 		this.id = id;
 		this.title = title;
-		this.decription = decription;
+		this.description = decription;
 		this.completed = completed;
 	}
 
